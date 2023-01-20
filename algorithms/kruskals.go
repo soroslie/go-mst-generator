@@ -6,22 +6,15 @@ import (
 	edge "graphs/edge"
 	"sort"
 )
-
-// Kruskals - Object
-//	Contains the number of Verticies in the graph,
-//	and the edges which make up the graph
 type Kruskals struct {
 	Verticies int
 	Edges     []edge.Edge
 	Total     int
 }
 
-// Construct the minimum spanning tree for this instances graph
 func (k *Kruskals) Construct(isTest bool) {
 	index := 0
 
-	// Sorting Reference found here:
-	//	https://golangdocs.com/golang-sort-package
 	sort.Sort(edge.Edges(k.Edges))
 
 	subsets := make([]dsu.Subset, k.Verticies)
@@ -60,8 +53,3 @@ func (k *Kruskals) Construct(isTest bool) {
 	}
 }
 
-// Sort all the edges
-// Take the edge with the lowest weight and add it to the spanning tree.
-//	If adding the edge create a cycle, remove the added edge.
-//		This is the DSU Structures
-//	Keep adding the edges until we reach all the verticies
